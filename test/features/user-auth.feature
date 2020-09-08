@@ -10,7 +10,11 @@ Feature: User Authentication with Gluu Server
     When user click on login button
     Then user should get redirected to OP Server
 
-    Scenario: User Authentication
+    Scenario: User Authentication and able to see profile details
     When user click on login button, redirect to op and enter credentials "ross" and "Ross@123"
     Then user should get redirected back to website and see profile details with name "ross"
+    
+    Scenario: Another User Authentication and able to see profile details
+    When user click on login button, redirect to op and enter credentials "joey" and "Joey@123"
+    Then user should get redirected back to website and see profile details with name "joey"
     

@@ -42,6 +42,9 @@ app.use((err, req, res, next) => {
   }
 });
 
+// views assets
+app.use(express.static(__dirname + '/views/assets'));
+
 // For self-signed certificate.
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 

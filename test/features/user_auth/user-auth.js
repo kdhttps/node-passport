@@ -1,8 +1,10 @@
 const assert = require('assert');
-const { After, When, Then, BeforeAll, AfterAll } = require('cucumber');
+const { After, When, Then, BeforeAll, AfterAll, setDefaultTimeout } = require('cucumber');
 const { Builder, By, until, Capabilities, Capability } = require('selenium-webdriver');
 const { expect } = require('chai');
 var server = require('../../../index');
+
+setDefaultTimeout(10000);
 
 BeforeAll(async () => {
     await new Promise((resolve, _) => {
@@ -80,7 +82,7 @@ When('user click on login button, redirect to op and enter credentials {string} 
 
 Then('user should get redirected back to website and see profile details with name {string}', async (name) => {
     const userName = await this.driver.findElement(By.id('username'));
-    expect(await userName.getText()).to.match(/ross/);
+    expect(await userName.getText()).to.match(new RegExp(name));
 });
 
 After(async () => {
