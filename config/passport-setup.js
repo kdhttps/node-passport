@@ -11,7 +11,6 @@ passport.use(
     // verify
     (req, accessTokenResponse, userInfoResponse, done) => {
     if (accessTokenResponse) {
-      console.log('------ profile -----', userInfoResponse, '----- accessToken ------', accessTokenResponse);
       return done(null, { id: userInfoResponse.sub, name: userInfoResponse.name });
     }
 
