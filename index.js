@@ -49,3 +49,5 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 server.listen(4200, () => {
     console.log(`-----------------------\nServer started successfully!, Open this URL http://localhost:4200\n-----------------------`);
 });
+
+module.exports = server;
