@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport');
+const strategies = ['oxd', 'oidc'];
 
 // auth login
 router.get('/login', (req, res) => {
@@ -12,14 +13,14 @@ router.get('/logout', (req, res) => {
   res.redirect('/auth/login');
 });
 
-// auth with gluu
-router.get('/gluu', passport.authenticate('oxd', {
-  scope: ['email', 'profile', 'openid']
-}));
+strategies.forEach((strategy) => {
+  // auth with gluu
+  router.get(`/${strategy}`, passport.authenticate(strategy, {}));
 
-// redirect uri
-router.get('/gluu/redirect', passport.authenticate('oxd'), (req, res) => {
-  res.redirect('/profile');
+  // redirect uri
+  router.get(`/${strategy}/redirect`, passport.authenticate(strategy), (req, res) => {
+    res.redirect('/profile');
+  });
 });
 
 module.exports = router;

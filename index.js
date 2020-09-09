@@ -2,10 +2,10 @@ const express = require('express');
 const fs = require('fs');
 const cookie = require('cookie-session');
 const passport = require('passport');
-
 const authRoute = require('./routes/auth-routes');
 const profileRoute = require('./routes/profile-route');
-const passportOXD = require('./config/passport-setup');
+
+const passportStrategies = require('./config/passport-setup');
 
 const app = express();
 const server = require('http').Server(app);

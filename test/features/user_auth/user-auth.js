@@ -27,7 +27,7 @@ When('user request for profile', async () => {
 });
 
 Then('user should get login button', async () => {
-    const loginButton = await this.driver.wait(until.elementLocated(By.linkText('Gluu Login')), 5000);
+    const loginButton = await this.driver.wait(until.elementLocated(By.linkText('User login - Passport OXD')), 5000);
     assert(loginButton);
 });
 
@@ -43,7 +43,7 @@ When('user click on login button', async () => {
     await this.driver.get('http://localhost:4200');
 
     await this.driver.findElement(By.linkText('Profile')).click();
-    await this.driver.wait(until.elementLocated(By.linkText('Gluu Login')), 10000).click();
+    await this.driver.wait(until.elementLocated(By.linkText('User login - Passport OXD')), 10000).click();
 });
 
 Then('user should get redirected to OP Server', async () => {
@@ -63,7 +63,7 @@ When('user click on login button, redirect to op and enter credentials {string} 
     await this.driver.get('http://localhost:4200');
 
     await this.driver.findElement(By.linkText('Profile')).click();
-    await this.driver.wait(until.elementLocated(By.linkText('Gluu Login')), 10000).click();
+    await this.driver.wait(until.elementLocated(By.linkText('User login - Passport OXD')), 10000).click();
 
     // Now we are at OP side
     await this.driver.wait(until.elementLocated(By.id('loginForm:username')), 10000).sendKeys(name);
@@ -98,7 +98,7 @@ When('user click on login button, redirect to authz server, select external op s
     await this.driver.get('http://localhost:4200');
 
     await this.driver.findElement(By.linkText('Profile')).click();
-    await this.driver.wait(until.elementLocated(By.linkText('Gluu Login')), 10000).click();
+    await this.driver.wait(until.elementLocated(By.linkText('User login - Passport OXD')), 10000).click();
 
     // Now we are at authz(OP) server
     await this.driver.wait(until.elementLocated(By.xpath(`//img[@alt="${providerName}"]`)), 10000).click();
