@@ -18,3 +18,14 @@ Feature: User Authentication with Gluu Server
     When user click on login button, redirect to op and enter credentials "joey" and "Joey@123"
     Then user should get redirected back to website and see profile details with name "joey"
     
+    Scenario: User Authentication with external OpenID Provider Server and should able to see the profile details
+    When user click on login button, redirect to authz server, select external op server provider "p2gluu"
+    When redirect to external OP, enter credentials "monica" and "Monica@123", and user authentication
+    When back to authz server, add and authenticate user
+    Then user should get redirected back to website and see profile details with name "monica"
+
+    Scenario: Another User Authentication with external OpenID Provider Server and should able to see the profile details
+    When user click on login button, redirect to authz server, select external op server provider "p2gluu"
+    When redirect to external OP, enter credentials "monica" and "Monica@123", and user authentication
+    When back to authz server, add and authenticate user
+    Then user should get redirected back to website and see profile details with name "monica"

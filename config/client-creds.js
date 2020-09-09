@@ -6,4 +6,5 @@ module.exports = {
     oxdServer: 'https://192.168.0.104:8443',
     scope: ['openid', 'email', 'profile'],
     redirect_uri: 'http://localhost:4200/auth/gluu/redirect',
+    acr_values: ['passport_social']
 };
