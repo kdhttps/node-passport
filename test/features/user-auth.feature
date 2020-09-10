@@ -24,12 +24,12 @@ Feature: User Authentication with Gluu Server
     When back to authz server, add and authenticate user
     Then user should get redirected back to website and see profile details with name "monica"
 
-    Scenario: Another User Authentication with external OpenID Provider Server and should able to see the profile details
-    When user click on login button, redirect to authz server, select external op server provider "p2gluu"
-    When redirect to external OP, enter credentials "monica" and "Monica@123", and user authentication
-    When back to authz server, add and authenticate user
-    Then user should get redirected back to website and see profile details with name "monica"
-
     Scenario: Using passport-openidconnect tool, User Authentication and able to see profile details
     When user click on oidc login button, redirect to op and enter credentials "ross" and "Ross@123"
     Then user should get redirected back to website and see profile details with name "ross"
+
+    Scenario: User Authentication with social site login "github" and should able to see the profile details
+    When user click on login button, redirect to authz server, select social oauth provider "github"
+    When redirect to social site login, enter credentials and user authentication
+    When back to authz server, add and authenticate user
+    Then user should get redirected back to website and see profile details
