@@ -133,6 +133,36 @@ When('back to authz server, add and authenticate user', async () => {
     }
 })
 
+When('user click on oidc login button, redirect to op and enter credentials {string} and {string}', async (name, password) => {
+    const capabilities = Capabilities.chrome();
+    capabilities.set(Capability.ACCEPT_INSECURE_TLS_CERTS, true);
+
+    this.driver = new Builder()
+        .withCapabilities(capabilities)
+        .forBrowser('chrome')
+        .build();
+
+    await this.driver.get('http://localhost:4200');
+
+    await this.driver.findElement(By.linkText('Profile')).click();
+    await this.driver.wait(until.elementLocated(By.linkText('User login - Passport OIDC')), 10000).click();
+
+    // Now we are at OP side
+    await this.driver.wait(until.elementLocated(By.id('loginForm:username')), 10000).sendKeys(name);
+    await this.driver.findElement(By.id('loginForm:password')).sendKeys(password);
+    await this.driver.findElement(By.id('loginForm:loginButton')).click();
+
+    // user allow for details, optional process for already auth user
+    try {
+        const scopeAllowButton = await this.driver.findElement(By.id('authorizeForm:allowButton'));
+        if (scopeAllowButton) {
+            await scopeAllowButton.click();
+        }
+    } catch (_) {
+
+    }
+});
+
 After(async () => {
     await this.driver.close();
 });

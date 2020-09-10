@@ -29,3 +29,7 @@ Feature: User Authentication with Gluu Server
     When redirect to external OP, enter credentials "monica" and "Monica@123", and user authentication
     When back to authz server, add and authenticate user
     Then user should get redirected back to website and see profile details with name "monica"
+
+    Scenario: Using passport-openidconnect tool, User Authentication and able to see profile details
+    When user click on oidc login button, redirect to op and enter credentials "ross" and "Ross@123"
+    Then user should get redirected back to website and see profile details with name "ross"
