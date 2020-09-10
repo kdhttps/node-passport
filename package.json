@@ -4,7 +4,7 @@
   "description": "Testing Node App with Gluu Server",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js test/*",
+    "test": "cucumber-js --exit test/*",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },

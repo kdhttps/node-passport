@@ -8,7 +8,6 @@ const profileRoute = require('./routes/profile-route');
 const passportStrategies = require('./config/passport-setup');
 
 const app = express();
-const server = require('http').Server(app);
 
 // set session
 app.set('trust proxy', 1); // trust first proxy
@@ -49,8 +48,8 @@ app.use(express.static(__dirname + '/views/assets'));
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 //Start listening server
-server.listen(4200, () => {
+app.listen(4200, () => {
     console.log(`-----------------------\nServer started successfully!, Open this URL http://localhost:4200\n-----------------------`);
 });
 
-module.exports = server;
+module.exports = app;

@@ -3,18 +3,8 @@ const { After, When, Then, BeforeAll, AfterAll, setDefaultTimeout } = require('c
 const { Builder, By, until, Capabilities, Capability } = require('selenium-webdriver');
 const { expect } = require('chai');
 var server = require('../../../index');
-const { resolve } = require('path');
 
 setDefaultTimeout(20000);
-
-BeforeAll(async () => {
-    await new Promise((resolve, _) => {
-        setTimeout(() => {
-            server = require('../../../index');
-            resolve();
-        }, 100);
-    })
-});
 
 When('user request for profile', async () => {
     this.driver = new Builder()
@@ -166,7 +156,3 @@ When('user click on oidc login button, redirect to op and enter credentials {str
 After(async () => {
     await this.driver.close();
 });
-
-AfterAll(async () => {
-    server.close();
-})
