@@ -23,6 +23,7 @@ When('user request for profile', async () => {
 });
 
 Then('user should get login button', async () => {
+  await this.driver.sleep(1000);
   const loginButton = await this.driver.wait(until.elementLocated(By.linkText('User login - Passport OXD')), 5000);
   assert(loginButton);
 });
@@ -39,6 +40,7 @@ When('user click on login button', async () => {
   await this.driver.get('http://localhost:4200');
 
   await this.driver.findElement(By.linkText('Profile')).click();
+  await this.driver.sleep(1000);
   await this.driver.wait(until.elementLocated(By.linkText('User login - Passport OXD')), 10000).click();
 });
 
@@ -59,6 +61,7 @@ When('user click on login button, redirect to op and enter credentials {string} 
   await this.driver.get('http://localhost:4200');
 
   await this.driver.findElement(By.linkText('Profile')).click();
+  await this.driver.sleep(1000);
   await this.driver.wait(until.elementLocated(By.linkText('User login - Passport OXD')), 10000).click();
 
   // Now we are at OP side
@@ -95,6 +98,7 @@ When('user click on login button, redirect to authz server, select external op s
   await this.driver.get('http://localhost:4200');
 
   await this.driver.findElement(By.linkText('Profile')).click();
+  await this.driver.sleep(1000);
   await this.driver.wait(until.elementLocated(By.linkText('User login - Passport OXD')), 10000).click();
 
   // Now we are at authz(OP) server
