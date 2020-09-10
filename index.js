@@ -1,11 +1,10 @@
 const express = require('express');
-const fs = require('fs');
 const cookie = require('cookie-session');
 const passport = require('passport');
 const authRoute = require('./routes/auth-routes');
 const profileRoute = require('./routes/profile-route');
 
-const passportStrategies = require('./config/passport-setup');
+require('./config/passport-setup');
 
 const app = express();
 
@@ -13,7 +12,7 @@ const app = express();
 app.set('trust proxy', 1); // trust first proxy
 app.use(cookie({
   maxAge: 24 * 60 * 60 * 1000,
-  keys: ['qwertyzxcvbnm']
+  keys: ['qwertyzxcvbnm'],
 }));
 
 // initialize passport
@@ -31,10 +30,12 @@ app.use('/profile', profileRoute);
 
 // Create route
 app.get('/', (req, res) => {
-  res.render('home', {user: req.user});
+  res.render('home', { user: req.user });
 });
 
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
+  // eslint-disable-next-line no-console
   console.log(err.stack);
   if (err) {
     res.status(500).send({ Error: err.stack });
@@ -42,14 +43,15 @@ app.use((err, req, res, next) => {
 });
 
 // views assets
-app.use(express.static(__dirname + '/views/assets'));
+app.use(express.static(`${__dirname}/views/assets`));
 
 // For self-signed certificate.
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-//Start listening server
+// Start listening server
 app.listen(4200, () => {
-    console.log(`-----------------------\nServer started successfully!, Open this URL http://localhost:4200\n-----------------------`);
+  // eslint-disable-next-line no-console
+  console.log('-----------------------\nServer started successfully!, Open this URL http://localhost:4200\n-----------------------');
 });
 
 module.exports = app;

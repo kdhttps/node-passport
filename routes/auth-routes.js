@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport');
+
 const strategies = ['oxd', 'oidc'];
 
 // auth login
