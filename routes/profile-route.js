@@ -1,14 +1,14 @@
-const router = require('express').Router();
+const router = require('express').Router()
 
 const authCheck = (req, res, next) => {
   if (!req.user) {
-    return res.redirect('/auth/login');
+    return res.redirect('/auth/login')
   }
-  return next();
-};
+  return next()
+}
 
 router.get('/', authCheck, (req, res) => {
-  res.render('profile', { user: req.user });
-});
+  res.render('profile', { user: req.user })
+})
 
-module.exports = router;
+module.exports = router

@@ -7,7 +7,7 @@
     "test": "cucumber-js --exit test/*",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "lint": "eslint *.js test/**/*.js routes/*.js config/*.js"
+    "style": "standard"
   },
   "repository": {
     "type": "git",
@@ -36,9 +36,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "cucumber": "^6.0.5",
-    "eslint": "^7.8.1",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.22.0",
-    "selenium-webdriver": "^4.0.0-alpha.7"
+    "selenium-webdriver": "^4.0.0-alpha.7",
+    "standard": "^14.3.4"
   }
 }

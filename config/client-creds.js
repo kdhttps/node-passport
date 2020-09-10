@@ -7,7 +7,7 @@ module.exports = {
     oxdServer: 'https://192.168.0.104:8443',
     scope: ['openid', 'email', 'profile'],
     redirect_uri: 'http://localhost:4200/auth/oxd/redirect',
-    acr_values: ['passport_social'],
+    acr_values: ['passport_social']
   },
   oidcClientConfig: {
     issuer: 'https://gluu.mali.org',
@@ -17,6 +17,6 @@ module.exports = {
     clientID: '0bba4de0-d55e-4401-a9ff-deed17143f6d',
     clientSecret: 'GcGYGCWMCQkCfYYUI2yj2p2Bjzsk6kYfQDFcq7aD',
     callbackURL: 'http://localhost:4200/auth/oidc/redirect',
-    scope: 'openid profile',
-  },
-};
+    scope: 'openid profile'
+  }
+}
