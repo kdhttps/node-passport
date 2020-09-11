@@ -7,29 +7,27 @@ Feature: User Authentication with Gluu Server
     Then user should get login button
 
     Scenario: User should redirect after clicking on login button
-    When user click on login button
+    When user click on "OXD" login button
     Then user should get redirected to OP Server
 
     Scenario: User Authentication and able to see profile details
-    When user click on login button, redirect to op and enter credentials "ross" and "Ross@123"
+    When user click on "OXD" login button, redirect to op and enter credentials "ross" and "Ross@123"
     Then user should get redirected back to website and see profile details with name "ross"
     
     Scenario: Another User Authentication and able to see profile details
-    When user click on login button, redirect to op and enter credentials "joey" and "Joey@123"
+    When user click on "OXD" login button, redirect to op and enter credentials "joey" and "Joey@123"
     Then user should get redirected back to website and see profile details with name "joey"
     
     Scenario: User Authentication with external OpenID Provider Server and should able to see the profile details
-    When user click on login button, redirect to authz server, select external op server provider "p2gluu"
+    When user click on "OXD" login button, redirect to authz server, select external op server provider "p2gluu"
     When redirect to external OP, enter credentials "monica" and "Monica@123", and user authentication
     When back to authz server, add and authenticate user
     Then user should get redirected back to website and see profile details with name "monica"
 
     Scenario: Using passport-openidconnect tool, User Authentication and able to see profile details
-    When user click on oidc login button, redirect to op and enter credentials "ross" and "Ross@123"
+    When user click on "OIDC" login button, redirect to op and enter credentials "ross" and "Ross@123"
     Then user should get redirected back to website and see profile details with name "ross"
-
-    Scenario: User Authentication with social site login "github" and should able to see the profile details
-    When user click on login button, redirect to authz server, select social oauth provider "github"
-    When redirect to social site login, enter credentials and user authentication
-    When back to authz server, add and authenticate user
-    Then user should get redirected back to website and see profile details
+        
+    Scenario: User Authentication with SAML and will be able to see profile details
+    When user click on "SAML" login button, redirect to op and enter credentials "ross" and "Ross@123"
+    Then user should get redirected back to website and see profile details with name "ross"
