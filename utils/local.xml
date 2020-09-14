@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="passport_saml_rp" ID="passport_saml_rp">
+  <SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+    <KeyDescriptor use="encryption">
+      <ds:KeyInfo>
+        <ds:X509Data>
+          <ds:X509Certificate>MIIDZTCCAk0CFCTMMVU0baICYVDLS3ifasQk6wmYMA0GCSqGSIb3DQEBCwUAMG8x
+CzAJBgNVBAYTAklOMQswCQYDVQQIDAJHSjEOMAwGA1UEBwwFU3VyYXQxDTALBgNV
+BAoMBG1hbGkxEjAQBgNVBAMMCWxvY2FsaG9zdDEgMB4GCSqGSIb3DQEJARYRa2Ro
+dHRwc0BnbWFpbC5jb20wHhcNMjAwOTAyMTIwODIxWhcNMjEwOTAyMTIwODIxWjBv
+MQswCQYDVQQGEwJJTjELMAkGA1UECAwCR0oxDjAMBgNVBAcMBVN1cmF0MQ0wCwYD
+VQQKDARtYWxpMRIwEAYDVQQDDAlsb2NhbGhvc3QxIDAeBgkqhkiG9w0BCQEWEWtk
+aHR0cHNAZ21haWwuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA
+0MQHOuNNQ6c5a/k6yj4GxkYbsuj2NpwZpb65ItzzQzqr8U6stEW6JiukxtlGD5Vn
++2Ydg64YdD8nEsX1NeWzMwGsH8R2ighjvsTTQJhsGdslJTRTDO9ViOq8ZS3ZF/Vi
+mXXCx5mkzvmSXlE3pGF3R3lzg+SMWF9Uby+JLRw99ElY4PyOaQA+JXgLc7XnlVLe
+RFJXbq4cjtSEq2LR84tGaaqThEXBsqMhmfV71SMyA4j2Rd8DveaRCEJW6poIPNkm
+FhZKWjzOFe3QXPyHp6bEeBtSA59ZXeTr0BhiQ3mluKDzgOFqPZxX0JsrZmA+ATq/
+P6EA/Z5UthYZac6CzMJJqQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQDNrl5gtlrZ
+/prSFXeDaKTxPGcgl59SkwvHx63hpm2ZX8g/UqbiHRJWPhOeZ3LG4sxrj6OHIMj0
+e0K0nypPPIGkinJEmqi8g4wlyQkzPlhF/hkGMr2A8DSDnrCz3kUg/XcnCJvkrvj4
+5PYFE+iWjYPBqDHHhe/koV/A2zM9Ril64zx3C0qaGoehB4gmpttXozjqJMpN5zLl
+rVWD4Hv7xUDdTarRwxPPTmYsLV7iMyyDcBnMH2Q/BxnKeslgprMalMZ4BROptH5Z
+cDyF2vELaEz0IYvGj/VK+xvnwoPCVOXLpS9T3FvKw1tyadhGKDF2r1clXnJQOmK2
+eDM6u7IY7DFe
+</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+      <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes256-cbc"/>
+      <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes128-cbc"/>
+      <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"/>
+    </KeyDescriptor>
+    <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+    <AssertionConsumerService index="1" isDefault="true" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="http://localhost:4200/auth/saml/redirect"/>
+  </SPSSODescriptor>
+</EntityDescriptor>

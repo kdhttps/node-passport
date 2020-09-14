@@ -1,0 +1,45 @@
+const fs = require('fs')
+const SAMLStrategy = require('../config/passport-setup').oPassportOIDCStrategy
+
+// decryptionCert from your idp - /etc/certs/passport-sp.crt in Gluu CE Case
+const decryptionCertContent = `-----BEGIN CERTIFICATE-----
+MIIDZTCCAk0CFCTMMVU0baICYVDLS3ifasQk6wmYMA0GCSqGSIb3DQEBCwUAMG8x
+CzAJBgNVBAYTAklOMQswCQYDVQQIDAJHSjEOMAwGA1UEBwwFU3VyYXQxDTALBgNV
+BAoMBG1hbGkxEjAQBgNVBAMMCWxvY2FsaG9zdDEgMB4GCSqGSIb3DQEJARYRa2Ro
+dHRwc0BnbWFpbC5jb20wHhcNMjAwOTAyMTIwODIxWhcNMjEwOTAyMTIwODIxWjBv
+MQswCQYDVQQGEwJJTjELMAkGA1UECAwCR0oxDjAMBgNVBAcMBVN1cmF0MQ0wCwYD
+VQQKDARtYWxpMRIwEAYDVQQDDAlsb2NhbGhvc3QxIDAeBgkqhkiG9w0BCQEWEWtk
+aHR0cHNAZ21haWwuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA
+0MQHOuNNQ6c5a/k6yj4GxkYbsuj2NpwZpb65ItzzQzqr8U6stEW6JiukxtlGD5Vn
++2Ydg64YdD8nEsX1NeWzMwGsH8R2ighjvsTTQJhsGdslJTRTDO9ViOq8ZS3ZF/Vi
+mXXCx5mkzvmSXlE3pGF3R3lzg+SMWF9Uby+JLRw99ElY4PyOaQA+JXgLc7XnlVLe
+RFJXbq4cjtSEq2LR84tGaaqThEXBsqMhmfV71SMyA4j2Rd8DveaRCEJW6poIPNkm
+FhZKWjzOFe3QXPyHp6bEeBtSA59ZXeTr0BhiQ3mluKDzgOFqPZxX0JsrZmA+ATq/
+P6EA/Z5UthYZac6CzMJJqQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQDNrl5gtlrZ
+/prSFXeDaKTxPGcgl59SkwvHx63hpm2ZX8g/UqbiHRJWPhOeZ3LG4sxrj6OHIMj0
+e0K0nypPPIGkinJEmqi8g4wlyQkzPlhF/hkGMr2A8DSDnrCz3kUg/XcnCJvkrvj4
+5PYFE+iWjYPBqDHHhe/koV/A2zM9Ril64zx3C0qaGoehB4gmpttXozjqJMpN5zLl
+rVWD4Hv7xUDdTarRwxPPTmYsLV7iMyyDcBnMH2Q/BxnKeslgprMalMZ4BROptH5Z
+cDyF2vELaEz0IYvGj/VK+xvnwoPCVOXLpS9T3FvKw1tyadhGKDF2r1clXnJQOmK2
+eDM6u7IY7DFe
+-----END CERTIFICATE-----`
+
+// signingCert - the cert from url https://<your.idp.com>/idp/shibboleth endpoint in side `signing` > `ds:X509Certificate`
+const signingCertContent = 'MIIDbTCCAlUCFEnkd/e2uygGhQXfX7bzdTL8N6XrMA0GCSqGSIb3DQEBCwUAMHMx CzAJBgNVBAYTAklOMQswCQYDVQQIDAJHSjEOMAwGA1UEBwwFU3VyYXQxDTALBgNV BAoMBG1hbGkxFjAUBgNVBAMMDWdsdXUubWFsaS5vcmcxIDAeBgkqhkiG9w0BCQEW EWtkaHR0cHNAZ21haWwuY29tMB4XDTIwMDkwMjEyMDgyMFoXDTIxMDkwMjEyMDgy MFowczELMAkGA1UEBhMCSU4xCzAJBgNVBAgMAkdKMQ4wDAYDVQQHDAVTdXJhdDEN MAsGA1UECgwEbWFsaTEWMBQGA1UEAwwNZ2x1dS5tYWxpLm9yZzEgMB4GCSqGSIb3 DQEJARYRa2RodHRwc0BnbWFpbC5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAw ggEKAoIBAQDVFzhpcluieFP6VXnp/8T+NmMwl3qrQIXWU1v5lbdK0hedEdmgM2gv IcUZ8gSWvxa6DjbXyOloRza7foTY9NblpSP+/VgyL19l+JAkQZmlmM+aW+6XG+uq Fsfa46PeqdM0T+6Bd00OBsQKiUnmJ21dHRcRtlumHUNwSuUN8j03sKYUS7GqsWxD I1e3smy34yeRSvyrSOftW9rYUYWCsSQm56VBNp/2SDZRevufCUhyuPJqD5v87g8h 5UlDBpCP+IN265ai7OuVHQgyR76oZ7sLEF9/Mo4bQP3IAbYX5ejXibh8HWQ5y9A6 /GtsL7fRvEIG78+fPKw2TKCQdgwQZMybAgMBAAEwDQYJKoZIhvcNAQELBQADggEB AHWaxBW3uFWQ4BERGpPI9sQJFbuHfKOXU1U6LoI4DhuhTourejxoANsVGjdn995c vD4NVB9CYApiG0RdhhBkatniuV71e0IQeT+VWspcTDumDuJVTNQPhkk+oZAcXfZG rwDDN6VAT+JtSfMCveF39yqqeigoftyhyi6tK4xUzful83W71Sv3tvcT1896qUJq UYe48b8qw/l6suSkNM0nhuEcXt2XPF/R5EqMGILZffUN5Pc0NOXaUQS0MW5BrUEY 13uHNivneEOI7YfKqdxSQa180D/b+1ViqejF/WScu2T2/o64vROwXa9OJjrI2I4d hD++HHIfN0Z5X7Ykd/DrrGc='
+
+// metafile name
+const metaFile = `${__dirname}/local.xml`
+
+async function generateMetadata () {
+  try {
+    const metaContent = await SAMLStrategy.generateServiceProviderMetadata(decryptionCertContent, signingCertContent)
+    console.log(metaContent)
+    console.log(metaFile)
+    await fs.openSync(metaFile, 'w')
+    await fs.writeFileSync(metaFile, metaContent)
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+generateMetadata()
