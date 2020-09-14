@@ -7,7 +7,7 @@ module.exports = {
     oxdServer: 'https://192.168.0.104:8443',
     scope: ['openid', 'email', 'profile'],
     redirect_uri: 'http://localhost:4200/auth/oxd/redirect',
-    acr_values: ['passport_social']
+    acr_values: [process.env.ACR_VALUE],
   },
   oidcClientConfig: {
     issuer: 'https://gluu.mali.org',
