@@ -7,7 +7,7 @@
     "test": "cucumber-js --exit test/*",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "style": "standard"
+    "lint": "standard"
   },
   "repository": {
     "type": "git",
@@ -38,7 +38,13 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "cucumber": "^6.0.5",
+    "husky": "^4.3.0",
     "selenium-webdriver": "^4.0.0-alpha.7",
     "standard": "^14.3.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   }
 }
