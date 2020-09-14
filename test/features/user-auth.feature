@@ -31,3 +31,9 @@ Feature: User Authentication with Gluu Server
     Scenario: User Authentication with SAML and will be able to see profile details
     When user click on "SAML" login button, redirect to op and enter credentials "ross" and "Ross@123"
     Then user should get redirected back to website and see profile details with name "ross"
+
+    Scenario: User Authentication with external SAML Provider Server and should able to see the profile details
+    When user click on "INBOUND_SAML" login button, redirect to authz server, select external op server provider "p2gluusaml"
+    When redirect to external OP, enter credentials "virat" and "Virat@123", and user authentication
+    When back to authz server, add and authenticate user
+    Then user should get redirected back to website and see profile details with name "virat"
