@@ -37,3 +37,16 @@ Feature: User Authentication with Gluu Server
     When redirect to external OP, enter credentials "virat" and "Virat@123", and user authentication
     When back to authz server, add and authenticate user
     Then user should get redirected back to website and see profile details with name "virat"
+
+    Scenario: User Authentication with external OpenID Provider Server and auth should fail because email linking is off
+              User cannot login with Inbound passport for p2gluu provider
+    When user click on "OXD" login button, redirect to authz server, select external op server provider "p2gluu"
+    When redirect to external OP, enter credentials "dhoni" and "Dhoni@123", and user authentication
+    Then failed auth, user with email is already exist
+
+    Scenario: User Authentication with external OpenID Provider Server and auth should get success because email linking is on
+              User can login with Inbound passport for p2gluu_email_linking provider
+    When user click on "OXD" login button, redirect to authz server, select external op server provider "p2gluu_email_linking"
+    When redirect to external OP, enter credentials "dhoni" and "Dhoni@123", and user authentication
+    When back to authz server, add and authenticate user
+    Then user should get redirected back to website and see profile details with name "dhoni"

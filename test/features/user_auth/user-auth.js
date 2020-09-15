@@ -136,6 +136,11 @@ When('back to authz server, add and authenticate user', async () => {
   }
 })
 
+Then('failed auth, user with email is already exist', async () => {
+  const message = await this.driver.findElement(By.css('.errormsg'))
+  expect(await message.getText()).to.match(new RegExp('Email value corresponds to an already existing account'))
+})
+
 After(async () => {
   await this.driver.close()
 })
