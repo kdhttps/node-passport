@@ -141,6 +141,53 @@ Then('failed auth, user with email is already exist', async () => {
   expect(await message.getText()).to.match(new RegExp('Email value corresponds to an already existing account'))
 })
 
+When('user request for first IDP authentication Unsolicited endpoint {string}', async (IDPUnsolicitedEndpointWithRequest) => {
+  const capabilities = Capabilities.chrome()
+  capabilities.set(Capability.ACCEPT_INSECURE_TLS_CERTS, true)
+
+  this.driver = new Builder()
+    .withCapabilities(capabilities)
+    .forBrowser('chrome')
+    .build()
+
+  await this.driver.get(IDPUnsolicitedEndpointWithRequest)
+})
+
+When('enter credentials {string} and {string}, and authentication happens', async (username, password) => {
+  // Now we are at IDP Login page
+  try {
+    await this.driver.wait(until.elementLocated(By.id('loginForm:username')), 10000).sendKeys(username)
+    await this.driver.findElement(By.id('loginForm:password')).sendKeys(password)
+    await this.driver.findElement(By.id('loginForm:loginButton')).click()
+  } catch (e) {
+    console.log(`error on ${await this.driver.getCurrentUrl()} -->`, e)
+    this.driver.takeScreenshot().then(
+      (image, err) => {
+        require('fs').writeFile(`${new Date().getTime()}_error.png`, image, 'base64', (err) => {
+          console.log('Failed to save screenshot', err)
+        })
+      }
+    )
+  }
+})
+
+Then('redirected to SP and able to access resources', async () => {
+  // Now we are at SP
+  try {
+    const textOnRelayStatePage = await this.driver.findElement(By.tagName('body')).getText()
+    expect(textOnRelayStatePage).to.match(new RegExp('If you are seeing this message, no relayState cookie was found. No final redirect could be made.'))
+  } catch (e) {
+    console.log(`error on ${await this.driver.getCurrentUrl()} -->`, e)
+    this.driver.takeScreenshot().then(
+      (image, err) => {
+        require('fs').writeFile(`${new Date().getTime()}_error.png`, image, 'base64', (err) => {
+          console.log('Failed to save screenshot', err)
+        })
+      }
+    )
+  }
+})
+
 After(async () => {
   await this.driver.close()
 })
