@@ -51,8 +51,14 @@ Feature: User Authentication with Gluu Server
     When back to authz server, add and authenticate user
     Then user should get redirected back to website and see profile details with name "dhoni"
 
-    Scenario: SAML SSO IDP-Initiated authentication, User first login into IDP, IDP authenticate the user 
+    Scenario: Inbound SAML SSO IDP-Initiated authentication, User first login into IDP, IDP authenticate the user 
               and redirected to SP and user will be able to access protected resources
     When user request for first IDP authentication Unsolicited endpoint "https://p2.gluu.org/idp/profile/SAML2/Unsolicited/SSO?providerId=passport_saml_rp"
     When enter credentials "virat" and "Virat@123", and authentication happens
     Then redirected to SP and able to access resources
+
+    Scenario: SAML SSO IDP-Initiated authentication, User first login into IDP, IDP authenticate the user 
+              and redirected to SP and user will be able to access protected resources
+    When user request for first IDP authentication Unsolicited endpoint "https://gluu.mali.org/idp/profile/SAML2/Unsolicited/SSO?providerId=passport_saml_rp"
+    When enter credentials "ross" and "Ross@123", and authentication happens
+    Then user should get redirected back to website and see profile details with name "ross"
