@@ -2,8 +2,6 @@ const router = require('express').Router()
 const passport = require('passport')
 const bodyParser = require('body-parser')
 
-const strategies = ['oxd', 'oidc', 'saml']
-
 // auth login
 router.get('/login', (req, res) => {
   res.render('login', { user: req.user })
@@ -15,17 +13,18 @@ router.get('/logout', (req, res) => {
   res.redirect('/auth/login')
 })
 
-strategies.forEach((strategy) => {
-  // auth with gluu
-  router.get(`/${strategy}`, passport.authenticate(strategy, {}))
+// auth with oidc
+router.get('/oidc', passport.authenticate('oidc-acr-passport-social', {}))
 
-  // redirect uri
-  router.get(`/${strategy}/redirect`, passport.authenticate(strategy), (req, res) => {
-    res.redirect('/profile')
-  })
+// redirect(callback) uri for oidc
+router.get('/oidc/redirect', passport.authenticate('oidc-acr-passport-social'), (req, res) => {
+  res.redirect('/profile')
 })
 
-// SAML assertion require HTTP Post handler
+// auth with saml
+router.get('/saml', passport.authenticate('saml', {}))
+
+// redirect(callback)SAML ACS uri assertion require HTTP Post handler
 router.post('/saml/redirect',
   bodyParser.urlencoded({ extended: false }),
   passport.authenticate('saml', { failureRedirect: '/', failureFlash: true }),
@@ -35,6 +34,6 @@ router.post('/saml/redirect',
 )
 
 // auth with gluu passport saml
-router.get('/inbound_saml', passport.authenticate('oxd', { acr_values: ['passport_saml'] }))
+router.get('/inbound_saml', passport.authenticate('oidc-acr-passport-saml', {}))
 
 module.exports = router

@@ -1,14 +1,4 @@
 module.exports = {
-  oxdClientConfig: {
-    issuer: 'https://gluu.mali.org',
-    clientID: 'ea932fb6-5abe-40d4-bedd-23bbdc93553a',
-    clientSecret: '75eb8fd9-6d3a-4424-8761-ca1c9e2113e4',
-    oxdID: '741ce4c3-0ced-4831-96aa-dec56afc89d5',
-    oxdServer: 'https://192.168.0.104:8443',
-    scope: ['openid', 'email', 'profile'],
-    redirect_uri: 'http://localhost:4200/auth/oxd/redirect',
-    acr_values: ['passport_social']
-  },
   oidcClientConfig: {
     issuer: 'https://gluu.mali.org',
     authorizationURL: 'https://gluu.mali.org/oxauth/restv1/authorize',
@@ -17,7 +7,7 @@ module.exports = {
     clientID: '13d55391-c08f-467c-85db-6a4a4f3b7c8f',
     clientSecret: 'DepscM0wERDZp9lLSBaSIfDfBbp0SGOkS8VU17H6',
     callbackURL: 'http://localhost:4200/auth/oidc/redirect',
-    scope: 'openid profile'
+    scope: 'openid email profile'
   },
   samlConfig: {
     entryPoint: 'https://gluu.mali.org/idp/profile/SAML2/POST/SSO',
