@@ -22,9 +22,9 @@ When('user request for profile', async () => {
   await this.driver.findElement(By.linkText('Profile')).click()
 })
 
-Then('user should get login button', async () => {
+Then('user should get login button {string}', async (button) => {
   await this.driver.sleep(1000)
-  const loginButton = await this.driver.wait(until.elementLocated(By.linkText('User login - Passport OXD')), 5000)
+  const loginButton = await this.driver.wait(until.elementLocated(By.linkText(button)), 5000)
   assert(loginButton)
 })
 
@@ -41,7 +41,7 @@ When('user click on {string} login button', async (button) => {
 
   await this.driver.findElement(By.linkText('Profile')).click()
   await this.driver.sleep(1000)
-  await this.driver.wait(until.elementLocated(By.linkText(`User login - Passport ${button}`)), 10000).click()
+  await this.driver.wait(until.elementLocated(By.linkText(button)), 10000).click()
 })
 
 Then('user should get redirected to OP Server', async () => {
@@ -62,7 +62,7 @@ When('user click on {string} login button, redirect to op and enter credentials 
 
   await this.driver.findElement(By.linkText('Profile')).click()
   await this.driver.sleep(1000)
-  await this.driver.wait(until.elementLocated(By.linkText(`User login - Passport ${button}`)), 10000).click()
+  await this.driver.wait(until.elementLocated(By.linkText(button)), 10000).click()
 
   // Now we are at OP side
   await this.driver.sleep(1000)
@@ -100,7 +100,7 @@ When('user click on {string} login button, redirect to authz server, select exte
 
   await this.driver.findElement(By.linkText('Profile')).click()
   await this.driver.sleep(1000)
-  await this.driver.wait(until.elementLocated(By.linkText(`User login - Passport ${button}`)), 10000).click()
+  await this.driver.wait(until.elementLocated(By.linkText(button)), 10000).click()
 
   // Now we are at authz(OP) server
   await this.driver.wait(until.elementLocated(By.xpath(`//img[@alt="${providerName}"]`)), 10000).click()
