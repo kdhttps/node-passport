@@ -32,7 +32,7 @@ passport.use('oidc',
     })
 )
 
-const oPassportOIDCStrategy = new PassportSAMLStrategy(strategyConfig.samlConfig,
+const oPassportSAMLStrategy = new PassportSAMLStrategy(strategyConfig.samlConfig,
   // verfiy
   (profile, done) => {
     console.log('--- SAML Response ---', profile)
@@ -41,9 +41,9 @@ const oPassportOIDCStrategy = new PassportSAMLStrategy(strategyConfig.samlConfig
 )
 
 passport.use(
-  oPassportOIDCStrategy
+  oPassportSAMLStrategy
 )
 
 module.exports = {
-  oPassportOIDCStrategy
+  oPassportSAMLStrategy
 }
