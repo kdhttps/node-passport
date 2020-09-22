@@ -1,6 +1,7 @@
 # Nodejs Passport
 
-Nodejs demo application secure by the OpenID Connect Authorization Code flow. I am using passport-js, passport-oxd and Gluu Server as a OpenID Connect Provider.
+Nodejs demo application secure by the OpenID Connect and SAML Security. I am using `passport-js` and `Gluu Server` as a OpenID Connect Provider. 
+[Check wiki pages](https://github.com/kdhttps/node-passport/wiki) for all the flow details, implementation and integration with Gluu Server.
 
 ![node-app](./docs/home.png)
 
@@ -31,4 +32,4 @@ Nodejs demo application secure by the OpenID Connect Authorization Code flow. I 
 
 ## Configuration
 
-[Check wiki page](https://github.com/kdhttps/node-passport/wiki) for all the flow details, implementation and integration with Gluu Server.
+[Check wiki pages](https://github.com/kdhttps/node-passport/wiki) for all the flow details, implementation and integration with Gluu Server.
