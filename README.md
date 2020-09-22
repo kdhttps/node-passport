@@ -2,6 +2,8 @@
 
 Nodejs demo application secure by the OpenID Connect Authorization Code flow. I am using passport-js, passport-oxd and Gluu Server as a OpenID Connect Provider.
 
+![node-app](./docs/home.png)
+
 # Prerequisite
 
 * node js >= 10.x.x
@@ -26,3 +28,7 @@ Nodejs demo application secure by the OpenID Connect Authorization Code flow. I 
     ```
     npm start
     ```
+
+## Configuration
+
+[Check wiki page](https://github.com/kdhttps/node-passport/wiki) for all the flow details, implementation and integration with Gluu Server.
