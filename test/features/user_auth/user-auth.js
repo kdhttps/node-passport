@@ -83,6 +83,7 @@ When('user click on {string} login button, redirect to op and enter credentials 
 })
 
 Then('user should get redirected back to website and see profile details with name {string}', async (name) => {
+  await this.driver.sleep(1000)
   const userName = await this.driver.findElement(By.id('username'))
   expect(await userName.getText()).to.match(new RegExp(name))
 })
@@ -108,6 +109,7 @@ When('user click on {string} login button, redirect to authz server, select exte
 
 When('redirect to external OP, enter credentials {string} and {string}, and user authentication', async (username, password) => {
   // Now we are at external OP side
+  await this.driver.sleep(1000)
   await this.driver.wait(until.elementLocated(By.id('loginForm:username')), 10000).sendKeys(username)
   await this.driver.findElement(By.id('loginForm:password')).sendKeys(password)
   await this.driver.findElement(By.id('loginForm:loginButton')).click()
@@ -156,6 +158,7 @@ When('user request for first IDP authentication Unsolicited endpoint {string}', 
 When('enter credentials {string} and {string}, and authentication happens', async (username, password) => {
   // Now we are at IDP Login page
   try {
+    await this.driver.sleep(1000)
     await this.driver.wait(until.elementLocated(By.id('loginForm:username')), 10000).sendKeys(username)
     await this.driver.findElement(By.id('loginForm:password')).sendKeys(password)
     await this.driver.findElement(By.id('loginForm:loginButton')).click()
