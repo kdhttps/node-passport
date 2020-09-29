@@ -107,12 +107,12 @@ When('user click on {string} login button, redirect to authz server, select exte
   await this.driver.wait(until.elementLocated(By.xpath(`//img[@alt="${providerName}"]`)), 10000).click()
 })
 
-When('redirect to external OP, enter credentials {string} and {string}, and user authentication', async (username, password) => {
+When('redirect to external OP, enter credentials {string} and {string}, and user authentication, username field is {string}, passwork is {string} and login button is {string}', async (username, password, usernameField, passwordField, loginButton) => {
   // Now we are at external OP side
   await this.driver.sleep(1000)
-  await this.driver.wait(until.elementLocated(By.id('loginForm:username')), 10000).sendKeys(username)
-  await this.driver.findElement(By.id('loginForm:password')).sendKeys(password)
-  await this.driver.findElement(By.id('loginForm:loginButton')).click()
+  await this.driver.wait(until.elementLocated(By.id(usernameField)), 10000).sendKeys(username)
+  await this.driver.findElement(By.id(passwordField)).sendKeys(password)
+  await this.driver.findElement(By.id(loginButton)).click()
 
   // user allow for details, optional process for already auth user
   try {
@@ -159,9 +159,9 @@ When('enter credentials {string} and {string}, and authentication happens', asyn
   // Now we are at IDP Login page
   try {
     await this.driver.sleep(1000)
-    await this.driver.wait(until.elementLocated(By.id('loginForm:username')), 10000).sendKeys(username)
-    await this.driver.findElement(By.id('loginForm:password')).sendKeys(password)
-    await this.driver.findElement(By.id('loginForm:loginButton')).click()
+    await this.driver.wait(until.elementLocated(By.id('username')), 10000).sendKeys(username)
+    await this.driver.findElement(By.id('password')).sendKeys(password)
+    await this.driver.findElement(By.id('loginButton')).click()
   } catch (e) {
     console.log(`error on ${await this.driver.getCurrentUrl()} -->`, e)
     this.driver.takeScreenshot().then(
