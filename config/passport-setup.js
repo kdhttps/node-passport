@@ -1,6 +1,8 @@
 const passport = require('passport')
 const PassportOIDCStrategy = require('passport-openidconnect')
 const PassportSAMLStrategy = require('passport-saml').Strategy
+const GoogleStrategy = require('passport-google-oauth2').Strategy
+
 const strategyConfig = require('./client-creds')
 
 passport.serializeUser((user, done) => done(null, user))
@@ -39,6 +41,15 @@ const oPassportSAMLStrategy = new PassportSAMLStrategy(strategyConfig.samlConfig
 
 passport.use(
   oPassportSAMLStrategy
+)
+
+passport.use(new GoogleStrategy(strategyConfig.googleClient,
+  // verify
+  (accessToken, refreshToken, profile, done) => {
+    console.log('--- Google profile ---', profile)
+    done(null, { id: profile.sub, name: profile.given_name })
+  }
+)
 )
 
 module.exports = {

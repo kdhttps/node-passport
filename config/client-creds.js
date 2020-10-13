@@ -4,48 +4,63 @@ module.exports = {
     authorizationURL: 'https://gluu.mali.org/oxauth/restv1/authorize',
     tokenURL: 'https://gluu.mali.org/oxauth/restv1/token',
     userInfoURL: 'https://gluu.mali.org/oxauth/restv1/userinfo',
-    clientID: '13d55391-c08f-467c-85db-6a4a4f3b7c8f',
-    clientSecret: 'DepscM0wERDZp9lLSBaSIfDfBbp0SGOkS8VU17H6',
+    clientID: '0afc1879-4aeb-4da9-bd02-223376b9dffc',
+    clientSecret: '2ydTfprKTkFTv45YEOSKsgtcwnes2prhujMUkp9q',
     callbackURL: 'http://localhost:4200/auth/oidc/redirect',
     scope: 'openid email profile'
   },
+  googleClient: {
+    clientID: '-----',
+    clientSecret: '----',
+    callbackURL: 'http://localhost:4200/auth/google/redirect'
+  },
+  // oidcClientConfig: {
+  //   issuer: 'https://p2.gluu.org',
+  //   authorizationURL: 'https://p2.gluu.org/oxauth/restv1/authorize',
+  //   tokenURL: 'https://p2.gluu.org/oxauth/restv1/token',
+  //   userInfoURL: 'https://p2.gluu.org/oxauth/restv1/userinfo',
+  //   clientID: 'b2710eca-fe6e-4962-87ea-9de771eec34c',
+  //   clientSecret: 'icN4Em686icxPopg6jf0Zm3fPp8pFs6WSvzQVM7y',
+  //   callbackURL: 'http://localhost:4200/auth/oidc/redirect',
+  //   scope: 'openid email profile'
+  // },
   samlConfig: {
-    entryPoint: 'https://gluu.mali.org/idp/profile/SAML2/POST/SSO',
+    entryPoint: 'https://p2.gluu.org/idp/profile/SAML2/POST/SSO',
     identifierFormat: 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
     authnRequestBinding: 'HTTP-POST',
-    issuer: 'passport_saml_rp',
+    issuer: 'passport_saml_rp_custom',
     skipRequestCompression: true,
     callbackUrl: 'http://localhost:4200/auth/saml/redirect',
-    cert: 'MIIDZzCCAk8CFBEpsZWJPn11KnqUTQCbTVRo/e24MA0GCSqGSIb3DQEBCwUAMHAx CzAJBgNVBAYTAklOMQswCQYDVQQIDAJHSjEOMAwGA1UEBwwFU3VyYXQxDTALBgNV BAoMBEdsdXUxFjAUBgNVBAMMDWdsdXUubWFsaS5vcmcxHTAbBgkqhkiG9w0BCQEW DmtpcmFuQGdsdXUub3JnMB4XDTIwMDkxNTEzMjgyN1oXDTIxMDkxNTEzMjgyN1ow cDELMAkGA1UEBhMCSU4xCzAJBgNVBAgMAkdKMQ4wDAYDVQQHDAVTdXJhdDENMAsG A1UECgwER2x1dTEWMBQGA1UEAwwNZ2x1dS5tYWxpLm9yZzEdMBsGCSqGSIb3DQEJ ARYOa2lyYW5AZ2x1dS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIB AQDGTkW9GGgd0U+2UEtzREb7oLj/O3XwavQClNTzY9VOyN0E8wmHl9BVfRWG0NoH zyoRDg7qikg8Z8OjIkuO70lmnW6A5C5441nw6FtBs7aRYProjMHEo7Tqihq+FtPW Pk2zEaRhuYsWqS27zuqz/rkoASkFDlvi4zr+T9MDf3i8Fo1l6+ZJqDzOBt4y98vG X6PjDRnpNMmcGBW72Jccl2QNeKH4XYVjVMQ/d/vXZL4aLmdNX81qkZUXyi881hwg XOJ9dSTCIPUqUUSqmlKWyltsqa35NbtqJwD10nRsxYCO09BleK2A3MBl9IzFwDY/ vw0Rb3ziGnMQ55OpQsPsXKTdAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAL/PtrPT Dlvs0zOUW7jmyO0snHmVXJYsmEd7HkWf40t9YEtVm8KmdzkoBwzj3pTjDmSS3i56 QDxWRBFytDclLaugWSC15CTSCiywuuToIQSyzQwU7RxFDBKZSeP7KqaOsdgN0WL9 NXi1DZQ93VKwfPq7uW5evRqQvMQz/38B/PUvai0gBbGF3B3N8REaWpbu+vNFsICO 0WX5kp1Cwp7YoWU1K/+03XKoFWzfzwWebgNlbhmHTWfJ1yXAxPkp3aEURxZOB90g cJi5f1HAzbAyaz6QJp5ta4iYZRnGITW82xtf0qC1oxH8e6sfrwLyIfPHxlCAaq6k pt5YQWUfMZKxlW0=',
+    cert: 'MIIDYzCCAksCFEkI/c3+1hq60vvZxZuyWe2xmgXLMA0GCSqGSIb3DQEBCwUAMG4x CzAJBgNVBAYTAklOMQswCQYDVQQIDAJHSjEOMAwGA1UEBwwFU3VyYXQxDTALBgNV BAoMBEdsdXUxFDASBgNVBAMMC3AyLmdsdXUub3JnMR0wGwYJKoZIhvcNAQkBFg5r aXJhbkBnbHV1Lm9yZzAeFw0yMDA5MjgxMzI3NTRaFw0yMTA5MjgxMzI3NTRaMG4x CzAJBgNVBAYTAklOMQswCQYDVQQIDAJHSjEOMAwGA1UEBwwFU3VyYXQxDTALBgNV BAoMBEdsdXUxFDASBgNVBAMMC3AyLmdsdXUub3JnMR0wGwYJKoZIhvcNAQkBFg5r aXJhbkBnbHV1Lm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALWu N7W7i/kdLRkdVyPpvsTkUg0Wt/UqdmQwO2agqmQ3omQZskeNuQM+1x4J6UL/vZp6 Ikt/BiYjuT2k8gAPw0j1bv3WDgfC2+m6JMJC4Bm97Xe+N9T126Ek1KnSjubQe/Zg 9lui8FRZrYTC9P7JMQQWGulQ1vfUYdp6V/huaP6qnP82xYGbCaFqrDgb9kQaf6Im 9zIwEby4//2vTlq7ObxNlk3Ed95n215WfOtXQNd2RG5A4mieGQXp27vLKCqW8nsk poczOMQM9ypjuB3lrLs0hsTizl7jlBXVrD2PNOsSgTLdUbI+lSSTz6/aM+Zlpb6M g5skIorUNVpz9pWWGiUCAwEAATANBgkqhkiG9w0BAQsFAAOCAQEAtUouwP1otY7b d/GrA3iT03lbepvtm7q11DNioa02ULUbwia2/Tlc4AHCv+tD83FfjNliQGrKvIhH mx25NMV4M0q6ZZIs43qG1CacqIxSH3ST+TUZeYY99eVisAqxs1ZeeOy9+QZqMywS OSfWfD0VBbSZowQZki7DUqfekhOftRv01IzvPjJtVYv06GKt9+HbS3Drxa+/D9Gu wEPIFbnGG9J8GojClSq4SXimAsjnl8aZSb2nMan7ocFMtG38Tm4gvhZvdnW7k22G k6v7YeFtKIuBnuu31fUFScWVbAi2+Mkd2Na+/CU+RHcZ6EUbr6WIelf5HnQabc8l 8sp9SFqtUw==',
     // validateInResponseTo: true,
     requestIdExpirationPeriodMs: 3600000,
     // /etc/certs/passport-sp.key
     decryptionPvk: `-----BEGIN RSA PRIVATE KEY-----
-    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
+    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
     -----END RSA PRIVATE KEY-----`
   }
 }

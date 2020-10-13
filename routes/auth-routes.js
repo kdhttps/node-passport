@@ -21,6 +21,14 @@ router.get('/oidc/redirect', passport.authenticate('oidc-acr-passport-social'), 
   res.redirect('/profile')
 })
 
+// auth with google
+router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
+
+// redirect(callback) uri for oidc
+router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
+  res.redirect('/profile')
+})
+
 // auth with saml
 router.get('/saml', passport.authenticate('saml', {}))
 
