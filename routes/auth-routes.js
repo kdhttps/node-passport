@@ -36,4 +36,13 @@ router.post('/saml/redirect',
 // auth with gluu passport saml
 router.get('/inbound_saml', passport.authenticate('oidc-acr-passport-saml', {}))
 
+// openid-client
+// auth with oidc
+router.get('/openidclient', passport.authenticate('openid-client', {}))
+
+// redirect(callback) uri for oidc
+router.get('/openidclient/redirect', passport.authenticate('openid-client'), (req, res) => {
+  res.redirect('/profile')
+})
+
 module.exports = router
