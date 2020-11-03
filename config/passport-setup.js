@@ -85,9 +85,8 @@ async function initOpenIdClientStrategy () {
     client_id: '2b4eedc3-b31a-45dd-b268-6c970ff16e67',
     client_secret: 'nmGIw7bAIKjrACXODzjPJyfYDaECAWSYzE1Temqz',
     redirect_uris: ['http://localhost:4200/auth/openidclient/redirect'],
-    token_endpoint_auth_method: 'private_key_jwt',
-    scope: 'openid profile'
-  }, ks.toJWKS(true), { scope: 'openid profile' })
+    token_endpoint_auth_method: 'private_key_jwt'
+  }, ks.toJWKS(true))
   console.log('----', Client)
   // openid-client
   passport.use('openid-client',
