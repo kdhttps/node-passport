@@ -38,7 +38,7 @@ router.get('/inbound_saml', passport.authenticate('oidc-acr-passport-saml', {}))
 
 // openid-client
 // auth with oidc
-router.get('/openidclient', passport.authenticate('openid-client', {}))
+router.get('/openidclient', passport.authenticate('openid-client', { scope: 'openid profile' }))
 
 // redirect(callback) uri for oidc
 router.get('/openidclient/redirect', passport.authenticate('openid-client'), (req, res) => {
