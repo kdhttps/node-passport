@@ -95,7 +95,7 @@ async function initOpenIdClientStrategy () {
     },
     (token, userinfo, done) => {
       console.log(token, userinfo)
-      done(null, { id: userinfo.sub })
+      done(null, { id: userinfo.sub, name: userinfo.name })
     })
   )
 }
