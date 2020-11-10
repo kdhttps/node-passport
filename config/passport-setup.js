@@ -20,13 +20,10 @@ const keySet = {
   ]
 }
 
-const jwk = keySet.keys[0]
-
-const ks = asKeyStore({
-  keys: [{ ...jwk }]
-})
+const ks = asKeyStore(keySet)
 
 const strategyConfig = require('./client-creds')
+const clientCreds = require('./client-creds')
 
 passport.serializeUser((user, done) => done(null, user))
 
@@ -67,7 +64,7 @@ passport.use(
 )
 
 async function initOpenIdClientStrategy () {
-  const issuer = await Issuer.discover('https://gluu.mali.org')
+  const issuer = await Issuer.discover(clientCreds.openidClientConfig.issuer)
   // const jwksRS256 = jwksKeys._keys.entries().next().value[0]
   // const jwksFinal = {
   //   kty: jwksRS256.kty,
@@ -81,12 +78,7 @@ async function initOpenIdClientStrategy () {
   //   n: jwksRS256.n
   // }
 
-  const Client = new issuer.Client({
-    client_id: '2b4eedc3-b31a-45dd-b268-6c970ff16e67',
-    client_secret: 'nmGIw7bAIKjrACXODzjPJyfYDaECAWSYzE1Temqz',
-    redirect_uris: ['http://localhost:4200/auth/openidclient/redirect'],
-    token_endpoint_auth_method: 'private_key_jwt'
-  }, ks.toJWKS(true))
+  const Client = new issuer.Client(clientCreds.openidClientConfig, ks.toJWKS(true))
   console.log('----', Client)
   // openid-client
   passport.use('openid-client',

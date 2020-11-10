@@ -15,6 +15,11 @@ app.use(cookie({
   keys: ['qwertyzxcvbnm']
 }))
 
+app.use((err, req, { redirect }, next) => {
+  console.log(`Unknown Error: ${err}`)
+  console.log(err.stack)
+})
+
 // initialize passport
 app.use(passport.initialize())
 app.use(passport.session())
@@ -36,7 +41,7 @@ app.get('/', (req, res) => {
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   // eslint-disable-next-line no-console
-  console.log(err.stack)
+  console.log('--------error-------', err.stack)
   if (err) {
     res.status(500).send({ Error: err.stack })
   }

@@ -1,11 +1,25 @@
 module.exports = {
+  openidClientConfig: {
+    client_id: '21238a5b-e9b6-45c1-a3ef-279230e450ef',
+    client_secret: 'Xo5KJyOOIa3tPcsuLPOmc0OcNDHv0tErDU8QFBy6',
+    redirect_uris: ['http://localhost:4200/auth/openidclient/redirect'],
+    token_endpoint_auth_method: 'private_key_jwt',
+    issuer: 'https://p2.gluu.org'
+  },
+  // openidClientConfig: {
+  //   client_id: '2b4eedc3-b31a-45dd-b268-6c970ff16e67',
+  //   client_secret: 'nmGIw7bAIKjrACXODzjPJyfYDaECAWSYzE1Temqz',
+  //   redirect_uris: ['http://localhost:4200/auth/openidclient/redirect'],
+  //   token_endpoint_auth_method: 'private_key_jwt',
+  //   issuer: 'https://gluu.mali.org'
+  // },
   oidcClientConfig: {
     issuer: 'https://gluu.mali.org',
     authorizationURL: 'https://gluu.mali.org/oxauth/restv1/authorize',
     tokenURL: 'https://gluu.mali.org/oxauth/restv1/token',
     userInfoURL: 'https://gluu.mali.org/oxauth/restv1/userinfo',
-    clientID: '13d55391-c08f-467c-85db-6a4a4f3b7c8f',
-    clientSecret: 'DepscM0wERDZp9lLSBaSIfDfBbp0SGOkS8VU17H6',
+    clientID: '326372e1-efc3-4779-8f0d-ed3f5ece52d3',
+    clientSecret: 'hOJs8tWnk3ayzrUhtsNDULypUKhBcS38G659panj',
     callbackURL: 'http://localhost:4200/auth/oidc/redirect',
     scope: 'openid email profile'
   },
