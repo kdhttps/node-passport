@@ -91,6 +91,10 @@ Nodejs demo application secure by the OpenID Connect and SAML Security. I am usi
 
 ```
 
+   Add above public keys in OP Client
+
+   ![Gluu 2020-11-12 15-45-00](https://user-images.githubusercontent.com/39133739/98927094-1b1b5000-24fe-11eb-9e06-cc13ca75b47b.png) 
+
 4. Now last step, you just need to create issuer, client and register `openid-client` strategy
 
 ```js
