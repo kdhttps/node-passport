@@ -65,25 +65,12 @@ passport.use(
 
 async function initOpenIdClientStrategy () {
   const issuer = await Issuer.discover(clientCreds.openidClientConfig.issuer)
-  // const jwksRS256 = jwksKeys._keys.entries().next().value[0]
-  // const jwksFinal = {
-  //   kty: jwksRS256.kty,
-  //   e: jwksRS256.e,
-  //   use: jwksRS256.use,
-  //   crv: jwksRS256.crv,
-  //   kid: jwksRS256.kid,
-  //   x5c: jwksRS256.x5c,
-  //   exp: jwksRS256.exp,
-  //   alg: jwksRS256.alg,
-  //   n: jwksRS256.n
-  // }
-
   const Client = new issuer.Client(clientCreds.openidClientConfig, ks.toJWKS(true))
-  console.log('----', Client)
   // openid-client
   passport.use('openid-client',
     new Strategy({
-      client: Client
+      client: Client,
+      usePKCE: false
     },
     (token, userinfo, done) => {
       console.log(token, userinfo)

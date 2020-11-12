@@ -1,18 +1,18 @@
 module.exports = {
-  openidClientConfig: {
-    client_id: '21238a5b-e9b6-45c1-a3ef-279230e450ef',
-    client_secret: 'Xo5KJyOOIa3tPcsuLPOmc0OcNDHv0tErDU8QFBy6',
-    redirect_uris: ['http://localhost:4200/auth/openidclient/redirect'],
-    token_endpoint_auth_method: 'private_key_jwt',
-    issuer: 'https://p2.gluu.org'
-  },
   // openidClientConfig: {
-  //   client_id: '2b4eedc3-b31a-45dd-b268-6c970ff16e67',
-  //   client_secret: 'nmGIw7bAIKjrACXODzjPJyfYDaECAWSYzE1Temqz',
+  //   client_id: 'b8280559-b3f6-4789-aee1-b3be0801f557',
+  //   client_secret: 'bTfp2wi50vFwkGJv9Q1or0UkAbi7sMTOjFaGufyE',
   //   redirect_uris: ['http://localhost:4200/auth/openidclient/redirect'],
   //   token_endpoint_auth_method: 'private_key_jwt',
-  //   issuer: 'https://gluu.mali.org'
+  //   issuer: 'https://p2.gluu.org'
   // },
+  openidClientConfig: {
+    client_id: '2b4eedc3-b31a-45dd-b268-6c970ff16e67',
+    client_secret: 'nmGIw7bAIKjrACXODzjPJyfYDaECAWSYzE1Temqz',
+    redirect_uris: ['http://localhost:4200/auth/openidclient/redirect'],
+    token_endpoint_auth_method: 'private_key_jwt',
+    issuer: 'https://gluu.mali.org'
+  },
   oidcClientConfig: {
     issuer: 'https://gluu.mali.org',
     authorizationURL: 'https://gluu.mali.org/oxauth/restv1/authorize',
