@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Testing Node App with Gluu Server",
   "main": "index.js",
+  "engines": {
+    "node": ">=12.19.0 <13.0.0"
+  },
   "scripts": {
     "test": "cucumber-js --exit test/*",
     "start": "node index.js",
