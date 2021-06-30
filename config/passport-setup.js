@@ -1,6 +1,6 @@
 const passport = require('passport')
 const PassportOIDCStrategy = require('passport-openidconnect')
-const PassportSAMLStrategy = require('passport-saml').Strategy
+const { MultiSamlStrategy } = require('passport-saml')
 const strategyConfig = require('./client-creds')
 
 passport.serializeUser((user, done) => done(null, user))
@@ -29,9 +29,19 @@ function oidcVerify (issuer, sub, profile, accessToken, refreshToken, done) {
   return done({ message: 'Failed to get access_token' }, null)
 }
 
-const oPassportSAMLStrategy = new PassportSAMLStrategy(strategyConfig.samlConfig,
+const oPassportSAMLStrategy = new MultiSamlStrategy(
+  {
+    passReqToCallback: true, // makes req available in callback
+    getSamlOptions: function (request, done) {
+      if (request.originalUrl.includes('saml1')) {
+        return done(null, strategyConfig.samlConfig1)
+      } else {
+        return done(null, strategyConfig.samlConfig2)
+      }
+    }
+  },
   // verfiy
-  (profile, done) => {
+  (req, profile, done) => {
     console.log('--- SAML Response ---', profile)
     return done(null, { id: profile['urn:oid:0.9.2342.19200300.100.1.3'], name: profile['urn:oid:2.16.840.1.113730.3.1.241'] })
   }

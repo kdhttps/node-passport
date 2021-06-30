@@ -22,10 +22,10 @@ router.get('/oidc/redirect', passport.authenticate('oidc-acr-passport-social'), 
 })
 
 // auth with saml
-router.get('/saml', passport.authenticate('saml', {}))
+router.get(['/saml1', '/saml2'], passport.authenticate('saml', {}))
 
 // redirect(callback)SAML ACS uri assertion require HTTP Post handler
-router.post('/saml/redirect',
+router.post(['/saml1/redirect', '/saml2/redirect'],
   bodyParser.urlencoded({ extended: false }),
   passport.authenticate('saml', { failureRedirect: '/', failureFlash: true }),
   function (req, res) {
